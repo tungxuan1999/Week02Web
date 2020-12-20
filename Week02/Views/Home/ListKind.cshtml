@@ -1,0 +1,11 @@
+﻿@model List<Week02.Models.LOAI_SP>
+
+<ul class="nav nav-list">
+    <li><a href="@Url.Action("Products", "Product")" ><span class="icon-chevron-right"> All</span></a></li>
+    @foreach (var i in Model)
+    {
+        <li><a href="@Url.Action("Products", "Product", new { maloai = i.MALOAI })"><span class="icon-chevron-right"></span> @i.Ten</a></li>
+    }
+    <li style="border:0"> &nbsp;</li>
+    <li> <a class="totalInCart" href="@Url.Action("Index", "Cart")"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height:18px;" id="spantotal"></span></strong></a></li>
+</ul>

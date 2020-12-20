@@ -1,0 +1,252 @@
+﻿<script type="text/javascript">
+    $(document).ready(function Hide() {
+        document.getElementById("sidebar").style.visibility = "hidden";
+    });
+    $Hide();
+</script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active">Cart Item</li>
+        </ul>
+        <div class="well well-small">
+            <h1>Check Out</h1>
+            <hr class="soften" />
+
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Description</th>
+                        @*<th>	Ref. </th>*@
+                        <th>Avail.</th>
+                        <th>Unit price</th>
+                        <th>Qty </th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="bodycart" name="bodycart">
+                    <!--<tr>
+                    <td><img width="100" src="~/assets/img/e.jpg" alt=""></td>
+                    <td>Items name here<br>Carate : 22<br>Model : n/a</td>-->
+                    @*<td> - </td>*@
+                    <!--<td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
+                        <td>$50.00</td>
+                        <td>
+                            <input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text" value="1">
+                            <div class="input-append">
+                                <button class="btn btn-mini" type="button">-</button>
+                                <button class="btn btn-mini" type="button"> + </button>
+                                <button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
+                                <button class="btn btn-mini btn-success" type="button"><span class="icon-refresh"></span></button>
+                            </div>
+                        </td>
+                        <td>$100.00</td>
+                    </tr>
+                    <tr>
+                        <td><img width="100" src="~/assets/img/f.jpg" alt=""></td>
+                        <td>Item names and brief details<br>Carate:24 <br>Model:HBK24</td>-->
+                    @*<td> - </td>*@
+                    <!--<td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
+                        <td>$348.42</td>
+                        <td>
+                            <input class="span1" style="max-width:34px" placeholder="1" size="16" type="text">
+                            <div class="input-append">
+                                <button class="btn btn-mini" type="button">-</button>
+                                <button class="btn btn-mini" type="button">+</button>
+                                <button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
+                                <button class="btn btn-mini btn-success" type="button"><span class="icon-refresh"></span></button>
+                            </div>
+                        </td>
+                        <td>$348.42</td>
+                    </tr>-->
+                    @*<tr>
+                            <td colspan="6" class="alignR">Total products:	</td>
+                            <td> $448.42</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="alignR">Total products:	</td>
+                            <td> $448.42</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="alignR">Total products:	</td>
+                            <td> $448.42</td>
+                        </tr>*@
+                    <!--<tr>
+                        <td colspan="6" class="alignR">Total products:	</td>
+                        <td class="label label-primary"> $448.42</td>
+                    </tr>-->
+                </tbody>
+            </table><br />
+
+
+            @*<table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form class="form-inline">
+                                    <label style="min-width:159px"> VOUCHERS Code: </label>
+                                    <input type="text" class="input-medium" placeholder="CODE">
+                                    <button type="submit" class="shopBtn"> ADD</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>*@
+            <table class="table table-bordered">
+                <tbody>
+                    <tr><td>ESTIMATE YOUR SHIPPING & TAXES</td></tr>
+                    <tr>
+                        <td>
+                            <form class="form-inline">
+                                @*<div class="control-group">*@
+                                <label class="span2 control-label" style="min-width: 159px" for="inputEmail">Address: </label>
+                                @*<div class="controls">*@
+                                @if (@HttpContext.Current.Session["login"] != null)
+                                {
+                                    <input type="text" placeholder="Address" style="min-width: 400px" class="input-medium" id="inputaddress" value="@((Session["login"] as Week02.Models.KHACHHANG).Diachi)">
+                                }
+                                else
+                                {
+                                    <input type="text" placeholder="Address" style="min-width: 400px" class="input-medium" id="inputaddress">
+                                }
+                                @*</div>*@
+                                @*</div>*@
+                                @*<div class="control-group">
+            <label class="span2 control-label" for="inputPassword">Post Code/ Zipcode</label>
+            <div class="controls">
+                <input type="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="shopBtn">Click to check the price</button>
+            </div>
+        </div>*@
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="@Url.Action("Index", "Home")" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+            @if (@HttpContext.Current.Session["login"] != null)
+            {
+                <button onclick="onpay()" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></button>
+            }
+            else
+            {
+                <a onclick="onshowdonotlogin()" href="@Url.Action("AccountLogin", "Account")" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    sessionStorage.setItem("hActive", 4);
+    if (sessionStorage.getItem("itemShopCarts") != null) {
+        var items = JSON.parse(sessionStorage.getItem("itemShopCarts"));
+        var sumgia = 0;
+        var sl = 0;
+        document.getElementById('bodycart').innerHTML = '';
+        for (var i = 0; i < items.length; i++) {
+            sumgia += items[i][2] * items[i][4];
+            sl += items[i][4];
+            document.getElementById('bodycart').innerHTML +=
+                '<tr>' +
+                '<td><img width="100" src="/assets/img/' + items[i][6].split(',')[0] + '" alt=""></td>' +
+                '<td>Name : ' + items[i][1] + '<br> Detail : ' + items[i][5] + '<br> Count : ' + items[i][3] + '</td>' +
+                '<td><span class="shopBtn"><span class="icon-ok"></span></span> </td>' +
+                '<td>$' + items[i][2] + '</td>' +
+                '<td>' +
+                '<input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons' + items[i][0] + '" size="16" type="number" value="' + items[i][4] + '" min="1" max="' + items[i][3] + '">' +
+                '<div class="input-append">' +
+                '<button class="btn btn-mini btn-danger" type="button" onclick="onremoveitem(' + "'" + items[i][0] + "'" + ')"><span class="icon-remove"></span></button>' +
+                '<button class="btn btn-mini btn-success" type="button" onclick="onchangeitem(' + "'" + items[i][0] + "'" + ')"><span class="icon-refresh"></span></button>' +
+                '</div>' +
+                '</td>' +
+                '<td>$' + items[i][2] * items[i][4] + '</td>' +
+                '</tr>'
+        }
+        document.getElementById('bodycart').innerHTML += '<tr>' +
+            '<td colspan="6" class="alignR">Total products:	</td>' +
+            '<td class="label label-primary"> $' + sumgia + '</td>'
+            + '</tr>';
+    }
+    else {
+        document.getElementById('bodycart').innerHTML = '<tr>' +
+            '<td colspan="6" class="alignR">Total products:	</td>' +
+            '<td class="label label-primary"> $' + 0 + '</td>'
+            + '</tr>';
+    }
+
+    function onchangeitem(masp) {
+        var items = JSON.parse(sessionStorage.getItem("itemShopCarts"));
+        var sl = parseInt(document.getElementById('appendedInputButtons' + masp).value);
+        for (var i = 0; i < items.length; i++) {
+            if (items[i][0] == masp) {
+                if (sl <= items[i][3] && sl > 0)
+                    items[i][4] = sl;
+                else {
+                    alert("Don't >= count and <= 0");
+                    return;
+                }
+                break;
+            }
+        }
+        sessionStorage.setItem("itemShopCarts", JSON.stringify(items));
+        location.reload();
+    }
+
+    function onremoveitem(masp) {
+        var aaa = confirm("Are you sure?");
+        if (aaa) {
+            var items = JSON.parse(sessionStorage.getItem("itemShopCarts"));
+            for (var i = 0; i < items.length; i++) {
+                if (items[i][0] == masp) {
+                    items.splice(i, 1);
+                    break;
+                }
+            }
+            sessionStorage.setItem("itemShopCarts", JSON.stringify(items));
+            location.reload();
+        }
+    }
+
+    function onpay() {
+        if (document.getElementById('inputaddress').value != '') {
+            var cartitem = JSON.parse(sessionStorage.getItem("itemShopCarts"));
+            var data = {
+                cartitem: cartitem,
+                address: document.getElementById('inputaddress').value
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddItemToPay", "Cart")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function (data) {
+                    if (data != "") {
+                        window.location.href = '/Cart/CheckOut?mahd=' + data;
+                    }
+                },
+                error: function () { alert('A error'); }
+            });
+        }
+        else {
+            alert('Vui lòng nhập địa chỉ');
+        }
+    }
+
+    function onshowdonotlogin() {
+        alert('You login please');
+    }
+
+</script>

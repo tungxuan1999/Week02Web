@@ -1,0 +1,170 @@
+﻿@model Week02.Models.CheckOutHD
+
+<script type="text/javascript">
+    $(document).ready(function Hide() {
+        document.getElementById("sidebar").style.visibility = "hidden";
+    });
+    $Hide();
+</script>
+
+
+<div class="row">
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active">Cart Item</li>
+        </ul>
+        <div class="well well-small">
+            <h1>Check Out</h1>
+            <hr class="soften" />
+
+            @if (@ViewBag.error != "Check Out not exist")
+            {
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Description</th>
+                            @*<th>	Ref. </th>*@
+                            <th>Avail.</th>
+                            <th>Unit price</th>
+                            <th>Qty </th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodycart" name="bodycart">
+                        @foreach (var i in Model.items)
+                        {
+                            <tr>
+                                <td><img width="100" src="~/assets/img/@i.Anh.Split(',')[0]" alt=""></td>
+                                <td>Name: @i.Ten<br>Detail : @i.Mota<br>Count : @i.TonKho</td>
+                                <td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
+                                <td>$@i.Gia</td>
+                                <td>
+                                    <input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text" value="@i.Soluong" readonly>
+                                </td>
+                                <td>$@i.TongGia</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="6" class="alignR">Total products:	</td>
+                            <td class="label label-primary"> $@Model.hOADON.Tongtien</td>
+                        </tr>
+                        <!--<tr>
+                        <td><img width="100" src="~/assets/img/e.jpg" alt=""></td>
+                        <td>Name: aaa<br>Detail : aaaa<br>Count : 9999</td>-->
+                        @*<td> - </td>*@
+                        <!--<td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
+                        <td>$50.00</td>
+                        <td>
+                            <input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text" value="1" readonly>-->
+                        @*<div class="input-append">
+                                <button class="btn btn-mini" type="button">-</button>
+                                <button class="btn btn-mini" type="button"> + </button>
+                                <button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
+                                <button class="btn btn-mini btn-success" type="button"><span class="icon-refresh"></span></button>
+                            </div>*@
+                        <!--</td>
+                            <td>$100.00</td>
+                        </tr>-->
+                        @*<tr>
+                            <td><img width="100" src="~/assets/img/f.jpg" alt=""></td>
+                            <td>Item names and brief details<br>Carate:24 <br>Model:HBK24</td>*@
+                        @*<td> - </td>*@
+                        <!--<td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
+                            <td>$348.42</td>
+                            <td>
+                                <input class="span1" style="max-width:34px" placeholder="1" size="16" type="text">
+                                <div class="input-append">
+                                    <button class="btn btn-mini" type="button">-</button>
+                                    <button class="btn btn-mini" type="button">+</button>
+                                    <button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
+                                    <button class="btn btn-mini btn-success" type="button"><span class="icon-refresh"></span></button>
+                                </div>
+                            </td>
+                            <td>$348.42</td>
+                        </tr>-->
+                        @*<tr>
+                                <td colspan="6" class="alignR">Total products:	</td>
+                                <td> $448.42</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="alignR">Total products:	</td>
+                                <td> $448.42</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="alignR">Total products:	</td>
+                                <td> $448.42</td>
+                            </tr>*@
+                        <!--<tr>
+                            <td colspan="6" class="alignR">Total products:	</td>
+                            <td class="label label-primary"> $448.42</td>
+                        </tr>-->
+                    </tbody>
+                </table><br />
+
+                switch (Model.hOADON.Trangthai)
+                {
+                    case 0:
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr><td>Pay</td></tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" style="min-width: 400px" class="input-medium" value="OK" onclick="onpaysuccess()">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                        break;
+                    case 1:
+                        {
+                            <h2>Pending</h2>
+                        }
+                        break;
+                    case 2:
+                        {
+                            <h2>Success</h2>
+                        }
+                        break;
+                    case 3:
+                        {
+                            <h2>Fail</h2>
+                        }
+                        break;
+                }
+
+            }
+            else
+            {
+                <h2>@ViewBag.error</h2>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function onpaysuccess() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("PaySuccess", "Cart")',
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        alert("Pay Success");
+                        sessionStorage.clear();
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Pay Fail")
+                        window.location.reload();
+                    }
+                },
+                error: function () { alert('A error'); }
+            });
+        }
+</script>

@@ -1,0 +1,104 @@
+﻿@model Week02.Models.LoginModel
+<script type="text/javascript">
+    function onSubmit() {
+        var pass = document.getElementById('password');
+        if (pass.value != null && pass.value != '') {
+            pass.value = sha256(pass.value);
+        }
+    }
+</script>
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li class="active">Login</li>
+</ul>
+<h3> Login</h3>
+<hr class="soft" />
+<div class="well">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", id = "login" }))
+    {
+        @*<form class="form-horizontal">*@
+        <label id="123123" style="color: red">@ViewBag.error</label>
+        <h3>Account</h3>
+        <div class="control-group">
+            @*<label class="control-label" for="inputEmail">Email <sup>*</sup></label>*@
+            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", id = "email" })
+                @Html.ValidationMessageFor(m => m.Email)
+                @*<input type="text" placeholder="Email">*@
+            </div>
+        </div>
+        <div class="control-group">
+            @*<label class="control-label">Password <sup>*</sup></label>*@
+            @Html.LabelFor(m => m.MK, new { @class = "control-label" })
+            <div class="controls">
+                @*<input type="password" placeholder="Password">*@
+                @Html.TextBoxFor(m => m.MK, new { placeholder = "Password", type = "password", id = "password" })
+                @Html.ValidationMessageFor(m => m.MK)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input onclick="onSubmit()" onkeypress="onSubmit()" type="submit" name="submitAccount" value="Login" class="exclusive shopBtn">
+            </div>
+        </div>
+        @*</form>*@
+    }
+</div>
+
+@section SideBar{
+    <div id="sidebar" class="span3">
+        <div class="well well-small">
+            @Html.Action("ListKind", "Home")
+        </div>
+
+        <div class="well well-small alert alert-warning cntr">
+            <h2>50% Discount</h2>
+            <p>
+                only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
+            </p>
+        </div>
+        <div class="well well-small"><a href="#"><img src="~/assets/img/paypal.jpg" alt="payment method paypal"></a></div>
+
+        <a class="shopBtn btn-block" href="#">Upcoming products <br><small>Click to view</small></a>
+        <br>
+        <br>
+        <ul class="nav nav-list promowrapper">
+            <li>
+                <div class="thumbnail">
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <img src="~/assets/img/bootstrap-ecommerce-templates.png" alt="bootstrap ecommerce templates">
+                    <div class="caption">
+                        <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
+                    </div>
+                </div>
+            </li>
+            <li style="border:0"> &nbsp;</li>
+            <li>
+                <div class="thumbnail">
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <img src="~/assets/img/shopping-cart-template.png" alt="shopping cart template">
+                    <div class="caption">
+                        <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
+                    </div>
+                </div>
+            </li>
+            <li style="border:0"> &nbsp;</li>
+            <li>
+                <div class="thumbnail">
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <img src="~/assets/img/bootstrap-template.png" alt="bootstrap template">
+                    <div class="caption">
+                        <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+}
+
+<script type="text/javascript">
+    sessionStorage.setItem("hActive", 1);
+</script>
+

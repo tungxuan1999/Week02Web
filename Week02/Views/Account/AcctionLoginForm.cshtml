@@ -1,0 +1,27 @@
+﻿@model Week02.Models.LoginModel
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal loginFrm", id = "login" }))
+{
+    <div class="control-group">
+        @Html.TextBoxFor(m => m.Email, new { @class = "span2", placeholder = "Email", id = "email" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="control-group">
+        @Html.TextBoxFor(m => m.MK, new { @class = "span2", placeholder = "Password", type = "password", id = "passwordForm" })
+        @Html.ValidationMessageFor(m => m.MK)
+    </div>
+    <div class="control-group">
+        <label class="checkbox">
+            <input type="checkbox"> Remember me
+        </label>
+        <input onclick="onSubmit()" onkeypress="onSubmit()" type="submit" name="submitAccount" value="Login" class="shopBtn btn-block">
+    </div>
+}
+
+<script type="text/javascript">
+    function onSubmit() {
+        var pass = document.getElementById('passwordForm');
+        if (pass.value != null && pass.value != '') {
+            pass.value = sha256(pass.value);
+        }
+    }
+</script>

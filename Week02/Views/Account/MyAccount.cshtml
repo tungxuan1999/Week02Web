@@ -1,0 +1,145 @@
+﻿@model Week02.Models.KHACHHANG
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li class="active">MyAccount</li>
+</ul>
+<h3> My Account</h3>
+<hr class="soft" />
+<div class="well">
+    @*<form class="form-horizontal">*@
+    <label id="123123" style="color: red">@ViewBag.error</label>
+    <h3>Account</h3>
+    <div class="control-group">
+        @*<label class="control-label" for="inputEmail">Email <sup>*</sup></label>*@
+        <label class="control-label">Email</label>
+        <div class="controls">
+            <input value="@Model.Email" type="email" readonly/>
+            @*<input type="text" placeholder="Email">*@
+        </div>
+    </div>
+    <h3>Information</h3>
+    <div class="control-group">
+        @*<label class="control-label" for="inputName">Name <sup>*</sup></label>*@
+        <label class="control-label">Name</label>
+        <div class="controls">
+            @*<input type="text" id="inputName" placeholder="First Name">*@
+            <input value="@Model.Ten" type="text" readonly />
+        </div>
+    </div>
+    <div class="control-group">
+        @*<label class="control-label" for="inputAdrs">Address <sup>*</sup></label>*@
+        <label class="control-label">Address</label>
+        <div class="controls">
+            @*<input type="text" id="inputAdrs" placeholder="Address">*@
+            <input value="@Model.Diachi" type="text" readonly />
+        </div>
+    </div>
+    <div class="control-group">
+        @*<label class="control-label" for="inputPhone">Phone <sup>*</sup></label>*@
+        <label class="control-label">Phone</label>
+        <div class="controls">
+            @*<input type="text" id="inputPhone" placeholder="Phone">*@
+            <input value="@Model.SDT" type="tel" readonly />
+        </div>
+    </div>
+    <div class="control-group">
+        @*<label class="control-label">Date of Birth <sup>*</sup></label>*@
+        <label class="control-label">Birthday</label>
+        <div class="controls">
+            <input value="@Model.Ngaysinh" type="date" readonly />
+            @*<select class="span1" name="days">
+                <option value="">-</option>
+                <option value="1">1&nbsp;&nbsp;</option>
+                <option value="2">2&nbsp;&nbsp;</option>
+                <option value="3">3&nbsp;&nbsp;</option>
+                <option value="4">4&nbsp;&nbsp;</option>
+                <option value="5">5&nbsp;&nbsp;</option>
+                <option value="6">6&nbsp;&nbsp;</option>
+                <option value="7">7&nbsp;&nbsp;</option>
+            </select>
+            <select class="span1" name="days">
+                <option value="">-</option>
+                <option value="1">1&nbsp;&nbsp;</option>
+                <option value="2">2&nbsp;&nbsp;</option>
+                <option value="3">3&nbsp;&nbsp;</option>
+                <option value="4">4&nbsp;&nbsp;</option>
+                <option value="5">5&nbsp;&nbsp;</option>
+                <option value="6">6&nbsp;&nbsp;</option>
+                <option value="7">7&nbsp;&nbsp;</option>
+            </select>
+            <select class="span1" name="days">
+                <option value="">-</option>
+                <option value="1">1&nbsp;&nbsp;</option>
+                <option value="2">2&nbsp;&nbsp;</option>
+                <option value="3">3&nbsp;&nbsp;</option>
+                <option value="4">4&nbsp;&nbsp;</option>
+                <option value="5">5&nbsp;&nbsp;</option>
+                <option value="6">6&nbsp;&nbsp;</option>
+                <option value="7">7&nbsp;&nbsp;</option>
+            </select>*@
+        </div>
+        <div class="control-group">
+            @*<label class="control-label" for="inputPhone">Phone <sup>*</sup></label>*@
+            <div class="controls">
+                @*<input type="text" id="inputPhone" placeholder="Phone">*@
+                <input value="Edit" type="button" onclick="window.location.href = '/Account/EditMyAccount';"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    sessionStorage.setItem("hActive", 2);
+</script>
+
+@section SideBar{
+    <div id="sidebar" class="span3">
+        <div class="well well-small">
+            @Html.Action("ListKind", "Home")
+        </div>
+
+        <div class="well well-small alert alert-warning cntr">
+            <h2>50% Discount</h2>
+            <p>
+                only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
+            </p>
+        </div>
+        <div class="well well-small"><a href="#"><img src="~/assets/img/paypal.jpg" alt="payment method paypal"></a></div>
+
+        <a class="shopBtn btn-block" href="#">Upcoming products <br><small>Click to view</small></a>
+        <br>
+        <br>
+        <ul class="nav nav-list promowrapper">
+            <li>
+                <div class="thumbnail">
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <img src="~/assets/img/bootstrap-ecommerce-templates.png" alt="bootstrap ecommerce templates">
+                    <div class="caption">
+                        <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
+                    </div>
+                </div>
+            </li>
+            <li style="border:0"> &nbsp;</li>
+            <li>
+                <div class="thumbnail">
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <img src="~/assets/img/shopping-cart-template.png" alt="shopping cart template">
+                    <div class="caption">
+                        <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
+                    </div>
+                </div>
+            </li>
+            <li style="border:0"> &nbsp;</li>
+            <li>
+                <div class="thumbnail">
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <img src="~/assets/img/bootstrap-template.png" alt="bootstrap template">
+                    <div class="caption">
+                        <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+}

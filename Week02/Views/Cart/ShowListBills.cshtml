@@ -1,0 +1,91 @@
+﻿@model List<Week02.Models.HOADON>
+<script type="text/javascript">
+    $(document).ready(function Hide() {
+        document.getElementById("sidebar").style.visibility = "hidden";
+    });
+    $Hide();
+</script>
+
+<div class="row">
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active">Bills</li>
+        </ul>
+        <div class="well well-small">
+            <h1>Bills</h1>
+            <hr class="soften" />
+
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>CODE BILL</th>
+                        <th>Create Date</th>
+                        @*<th>	Ref. </th>*@
+                        @*<th></th>*@
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Show</th>
+                    </tr>
+                </thead>
+                <tbody id="bodycart" name="bodycart">
+                    @*<tr>
+                            <td>H1</td>
+                            <td>1/1/1</td>
+                            <td>ASD</td>
+                            <td>Pending</td>
+                           <td>$100</td>
+                            <td><input type="button" value="Show" /></td>
+                        </tr>*@
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.MAHD</td>
+                            <td>@i.Ngaytao</td>
+                            <td>@i.Diachi</td>
+
+                            @switch (@i.Trangthai)
+                            {
+                                case 0:
+                                    {
+                                        <td>Waiting for payment</td>
+                                    }
+                                    break;
+                                case 1:
+                                    {
+                                        <td>Pending</td>
+                                    }
+                                    break;
+                                case 2:
+                                    {
+                                        <td>Success</td>
+                                    }
+                                    break;
+                                case 3:
+                                    {
+                                        <td>Fail</td>
+                                    }
+                                    break;
+                            }
+
+                            <td>$@i.Tongtien</td>
+                            <td><input type="button" value="Show" onclick="window.location.href ='/Cart/CheckOut?mahd=@i.MAHD';" /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table><br />
+
+            @*<table class="table table-bordered">
+                    <tbody>
+                        <tr><td>Pay</td></tr>
+                        <tr>
+                            <td>
+                                <input type="button" style="min-width: 400px" class="input-medium" value="OK">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>*@
+        </div>
+    </div>
+</div>
